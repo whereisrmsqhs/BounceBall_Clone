@@ -1,0 +1,7 @@
+5,6
+stage, object, posX, posY, posZ, rot
+1,square,0,-4,0,0
+1,creack,1,-4,0,0
+1,uparrow,2,-4,0,90
+1,square,3,-4,0,0
+1,rightarrow,4,-4,0,0,0
