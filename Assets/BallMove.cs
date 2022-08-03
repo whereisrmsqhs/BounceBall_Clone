@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallMove : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class BallMove : MonoBehaviour
     int jumpPower = 7;
     public Rigidbody2D rigid;
     BoxCollider2D collider;
+    CircleCollider2D collider_circle;
     SpriteRenderer srenderer;
+    int cur_stage;
 
     // Start is called before the first frame update
     void Start()
     {
+        cur_stage = 2;
         rigid = GetComponent<Rigidbody2D>();
         //collider = GetComponent<BoxCollider2D>();
        // srenderer = GetComponent<SpriteRenderer>();
@@ -34,13 +38,20 @@ public class BallMove : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
             transform.Translate(new Vector3(playerSpeed * Time.deltaTime, 0, 0));
         }
-     }
+
+        if (Mapmake.total_coins[cur_stage] == 1)
+        {
+            cur_stage++;
+            SceneManager.LoadScene(cur_stage);
+        }
+    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         srenderer = collision.gameObject.GetComponent<SpriteRenderer>();
         collider = collision.gameObject.GetComponent<BoxCollider2D>();
+        collider_circle = collision.gameObject.GetComponent<CircleCollider2D>();
 
        if(collision.gameObject.tag == "block")
         {
@@ -57,14 +68,17 @@ public class BallMove : MonoBehaviour
         }
         if(collision.gameObject.tag == "uparrow")
         {
-            rigid.velocity = new Vector2(0, jumpPower*2);
+            rigid.velocity = new Vector2(0, jumpPower+2);
         }
         if (collision.gameObject.tag == "rightarrow")
         {
             rigid.gravityScale = 0;
             transform.position = new Vector2(collision.transform.position.x + 1f, collision.transform.position.y);
             rigid.velocity = new Vector2(jumpPower, 0);
-
+        }
+        if (collision.gameObject.tag == "bomb")
+        {
+            transform.position = new Vector2(0.5f, 0);
         }
         
     }
@@ -79,6 +93,17 @@ public class BallMove : MonoBehaviour
             srenderer.color = new Color(1, 1, 1, 0);
             //collider.isTrigger = true;
             //Destroy(collision.gameObject, 0f);
+        }
+        if (collision.gameObject.tag == "coin")
+        {
+            srenderer = collision.gameObject.GetComponent<SpriteRenderer>();
+            srenderer.color = new Color(1, 1, 1, 0);
+
+            Destroy(this);
+
+            
+            Mapmake.total_coins[cur_stage]--;
+            
         }
 
     }

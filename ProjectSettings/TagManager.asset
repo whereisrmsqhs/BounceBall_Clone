@@ -8,6 +8,8 @@ TagManager:
   - crack
   - uparrow
   - rightarrow
+  - bomb
+  - coin
   layers:
   - Default
   - TransparentFX
