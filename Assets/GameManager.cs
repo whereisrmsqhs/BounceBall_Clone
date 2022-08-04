@@ -5,16 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public int coin_num;
+    public GameObject Mapmake;
+    public int stage_index;
+    public SceneManager Scenes;
+    //Mapmake map = new Mapmake();
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+        Mapmake = GameObject.Find("MapMaker");
+        Mapmake.GetComponent<Mapmake>().Make(0);
+        stage_index = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void NextStage()
     {
-        
+        stage_index++;
+        SceneManager.LoadScene(stage_index);
+        Mapmake.GetComponent<Mapmake>().Make(stage_index);
     }
 }

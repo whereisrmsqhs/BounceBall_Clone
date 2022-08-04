@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BallMove : MonoBehaviour
 {
+    public GameManager gameManager;
     float playerSpeed = 4f;
     int jumpPower = 7;
     public Rigidbody2D rigid;
@@ -16,7 +17,8 @@ public class BallMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cur_stage = 2;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        cur_stage = 0;
         rigid = GetComponent<Rigidbody2D>();
         //collider = GetComponent<BoxCollider2D>();
        // srenderer = GetComponent<SpriteRenderer>();
@@ -38,12 +40,7 @@ public class BallMove : MonoBehaviour
             transform.eulerAngles = new Vector3(0f, 180f, 0f);
             transform.Translate(new Vector3(playerSpeed * Time.deltaTime, 0, 0));
         }
-
-        if (Mapmake.total_coins[cur_stage] == 1)
-        {
-            cur_stage++;
-            SceneManager.LoadScene(cur_stage);
-        }
+        
     }
 
 
@@ -97,13 +94,18 @@ public class BallMove : MonoBehaviour
         if (collision.gameObject.tag == "coin")
         {
             srenderer = collision.gameObject.GetComponent<SpriteRenderer>();
-            srenderer.color = new Color(1, 1, 1, 0);
+            //srenderer.color = new Color(1, 1, 1, 0);
 
             Destroy(this);
 
             
             Mapmake.total_coins[cur_stage]--;
-            
+            if(Mapmake.total_coins[cur_stage] == 0)
+            {
+                Debug.Log("reload");
+                cur_stage++;
+                gameManager.NextStage();
+            }
         }
 
     }
