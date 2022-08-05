@@ -12,14 +12,18 @@ public class Mapmake : MonoBehaviour
     public int coin_num;
     public int cur_stage;
     public static int[] total_coins = new int[100];
+    public Scene scene;
 
     public void Awake()
     {
         Ball = GameObject.Find("Ball");
+
     }
     // Start is called before the first frame update
     public void Make(int stage)
     {
+        
+        Debug.Log("Build Map");
         // ¿œ¥‹ √π intro æ¿¿∫ Ω∫≈µ...
         cur_stage = stage;
         coin_num = 0;
@@ -58,6 +62,5 @@ public class Mapmake : MonoBehaviour
 
         total_coins[stage] = coin_num;  
     }
-    
     
 }

@@ -65,7 +65,7 @@ public class BallMove : MonoBehaviour
         }
         if(collision.gameObject.tag == "uparrow")
         {
-            rigid.velocity = new Vector2(0, jumpPower+2);
+            rigid.velocity = new Vector2(0, jumpPower+4);
         }
         if (collision.gameObject.tag == "rightarrow")
         {
@@ -93,12 +93,12 @@ public class BallMove : MonoBehaviour
         }
         if (collision.gameObject.tag == "coin")
         {
-            srenderer = collision.gameObject.GetComponent<SpriteRenderer>();
+            //srenderer = collision.gameObject.GetComponent<SpriteRenderer>();
             //srenderer.color = new Color(1, 1, 1, 0);
 
-            Destroy(this);
+            Destroy(collision.gameObject, 0f);
 
-            
+
             Mapmake.total_coins[cur_stage]--;
             if(Mapmake.total_coins[cur_stage] == 0)
             {

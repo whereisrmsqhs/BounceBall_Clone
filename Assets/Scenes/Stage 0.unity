@@ -254,6 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mapmake: {fileID: 0}
   stage_index: 0
+  time: 0
+  scene:
+    m_Handle: 0
 --- !u!114 &1213433735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +307,8 @@ MonoBehaviour:
   posZ: 0
   coin_num: 0
   cur_stage: 0
+  scene:
+    m_Handle: 0
 --- !u!4 &1658408765
 Transform:
   m_ObjectHideFlags: 0
