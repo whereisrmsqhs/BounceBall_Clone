@@ -25,11 +25,24 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         stage_index++;
-        StartCoroutine(LoadAsyncScene());
-       
+        StartCoroutine("LoadAsyncScene", stage_index);
+
         //Mapmake.GetComponent<Mapmake>().Make(stage_index);
+        TMPTest.stage++;
     }
-    IEnumerator LoadAsyncScene()
+
+
+    public void ReStart()
+    {
+        //Destroy(GameObject.Find("Ball")); Debug.Log("Destroy Ball");
+        //Destroy(GameObject.Find("Canvas"));
+        //Destroy(GameObject.Find("MapMaker"));
+        //Destroy(GameObject.Find("GameManager"));
+        StartCoroutine("LoadAsyncScene", stage_index);
+        
+    }
+
+    IEnumerator LoadAsyncScene(int stage_index)
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(stage_index);
 
@@ -38,6 +51,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         Mapmake.GetComponent<Mapmake>().Make(stage_index);
+        
     }
 
 }

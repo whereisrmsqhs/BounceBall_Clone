@@ -11,7 +11,7 @@ public class Mapmake : MonoBehaviour
     public float posX, posY, posZ;
     public int coin_num;
     public int cur_stage;
-    public static int[] total_coins = new int[100];
+    public static int[] total_coins = new int[900];
     public Scene scene;
 
     public void Awake()
@@ -60,7 +60,8 @@ public class Mapmake : MonoBehaviour
             }
         }
 
-        total_coins[stage] = coin_num;  
+        total_coins[stage] = coin_num;
+        Debug.Log("Build Map Finished");
     }
     
 }

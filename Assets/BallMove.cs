@@ -41,6 +41,11 @@ public class BallMove : MonoBehaviour
             transform.Translate(new Vector3(playerSpeed * Time.deltaTime, 0, 0));
         }
         
+        if(transform.position.y < -20)
+        {
+            gameManager.ReStart();
+        }
+
     }
 
 
@@ -75,7 +80,7 @@ public class BallMove : MonoBehaviour
         }
         if (collision.gameObject.tag == "bomb")
         {
-            transform.position = new Vector2(0.5f, 0);
+            transform.position = new Vector2(-20, -20);
         }
         
     }
@@ -102,7 +107,7 @@ public class BallMove : MonoBehaviour
             Mapmake.total_coins[cur_stage]--;
             if(Mapmake.total_coins[cur_stage] == 0)
             {
-                Debug.Log("reload");
+                Debug.Log("next stage");
                 cur_stage++;
                 gameManager.NextStage();
             }

@@ -5,14 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class DontDestroyObject : MonoBehaviour
 {
-    public static Scene scene;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        if(scene.isLoaded)
-        {
-
-        }
     }
     
 }
